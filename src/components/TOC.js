@@ -2,16 +2,26 @@ import React, { Component } from "react";
 
 class TOC extends Component {
   render() {
-    let lists=[];
-    const data=this.props.data;
-    data.forEach(element => {
-      lists.push(<li key={element.id}><a href={"/content/"+element.id}>{element.title}</a></li>);
+    let lists = [];
+    const data = this.props.data;
+    data.forEach((element) => {
+      lists.push(
+        <li key={element.id}>
+          <a
+            href={"/content/" + element.id}
+            onClick={function (e) {
+              e.preventDefault();
+              this.props.onChangePage(element.id);
+            }.bind(this)}
+          >
+            {element.title}
+          </a>
+        </li>
+      );
     });
     return (
       <nav>
-        <ul>
-          {lists}
-        </ul>
+        <ul>{lists}</ul>
       </nav>
     );
   }
